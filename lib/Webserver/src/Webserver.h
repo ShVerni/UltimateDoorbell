@@ -151,7 +151,7 @@ const char index_page[] = R"(<!DOCTYPE html>
 <h1>Default Server Setup</h1>
 <p>No index page found, this page will allow you to upload new web server files for your doorbell. You will need to reboot to use a new index page.</p>
 <p>Default files are: index.html, update.html, reset.html, the latter two are optional.</p>
-<p><strong>Upload ALL necessary web files (.html/.css/.html) before rebooting</strong>.</p>
+<p><strong>Upload ALL necessary web files (.html/.css/.js) before rebooting</strong>.</p>
 <div id='up-progress'>
     <div id='up-bar'></div>
     <div id='up-percent'>0%</div>
