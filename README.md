@@ -24,11 +24,11 @@ This list was composed of materials that could all be sourced from a single stor
 * [2.1mm DC barrel jack](https://www.adafruit.com/product/610)[^1]
 * [5V 2A Power Supply](https://www.adafruit.com/product/276)[^1]
 
-[^1]: Not all of these are required, see the power supply requirements below
+[^1]: Not all of these are required, see the power supply requirements.
 
 ## Power Requirements
 
-> [!IMPORTANT]
+> [!WARNING]
 > Make sure you know what kind of power is available to you for your chime. The chime itself requires 5VDC, so your setup must be able to provide this.
 
 Most household chimes in the United States use a 16VAC with a AC/AC transformer to bring the voltage down from the mains voltage. If this is the case, the safest option is to ignore/remove that transformer and use the 5V 2A supply and barrel jack from above and plug your doorbell into a standard outlet.
@@ -71,8 +71,8 @@ You'll need to wire up the various components to the TinyS3 ESP32 microcontrolle
 
 Below is an example diagram connecting to a Feather ESP32-S3 device.
 
-> [!WARNING]
-> This example does not match the current state of the code. Refer to the table above for the pin connections used in the code.
+> [!CAUTION]
+> This example does not match the current state of the code pin assignments for a TinyS3, this is just an example. Refer to the table above for the pin connections used in the code.
 
 ![Hookup diagram](media/diagram.PNG)
 
@@ -147,7 +147,7 @@ Uploading a file will overwrite an existing file. You can also delete files from
 
 This page allows you to manage the chime sounds that play. Any checked sounds will be available to play when the button is pushed. You can also adjust the volume at which the sounds will play or test-play any sound. After making changes you need to click the `Update Sound Settings` button.
 
-> [!WARNING]
+> [!IMPORTANT]
 > Chime sounds should have the following format: `mp3, 96 kbps bitrate, 44.1 khz sample rate`. Other formats may work, or may cause crashes or unexpected behavior.
 
 ![Screenshot of WiFi configuration](/media/Chimes.PNG)
