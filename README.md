@@ -44,20 +44,20 @@ This list was composed of materials that could all be sourced from a single stor
 ## Power Requirements
 
 > [!WARNING]
-> Make sure you know what kind of power is available to you for your chime. The chime itself requires 5VDC, so your setup must be able to provide this.
+> Make sure you know what kind of power is available for your chime. The chime itself requires 5VDC, so your setup must be able to provide this.
 
-Most household chimes in the United States use a 16VAC with a AC/AC transformer to bring the voltage down from the mains voltage. If this is the case, the safest option is to ignore/remove that transformer and use the 5V 2A supply and barrel jack from above and plug your doorbell into a standard outlet.
+Most household chimes in the United States use 16VAC with a AC/AC transformer to bring the voltage down from the mains voltage. If this is the case, the safest option is to ignore/remove that transformer and use the 5V 2A supply and barrel jack from the materials above and plug your doorbell into a standard outlet.
 
-If you already have DC voltage available at the wall thats greater than 5V, you can use the MPM3610 from above to bring the voltage down to 5V.
+If you already have DC voltage available at the wall that's greater than 5V, you can use the MPM3610 from above to bring the voltage down to 5V.
 
 # Assembly
 
 ## Hardware
 
-You'll need to wire up the various components to the TinyS3 ESP32 microcontroller in the following manner.
+While you can use any ESP32 device, one with two or more cores is highly recommended, and the ESP32-S3 is the preferred version, and specifically the TinyS3 board. You'll need to wire up the various components to the TinyS3 ESP32 in the following manner:
 
 > [!IMPORTANT]
-> This setup assumes the doorbell button connects to GND. If this is not the case, you'll need to modify the code and replace the pull-up resistor setting with a pull-down resistor.
+> This setup assumes the doorbell button connects to GND. If this is not the case, you'll need to modify the code and change the pull-up resistor setting to a pull-down resistor and change the code accordingly.
 
 |TinyS3 Pin| Device Pin  | Device               |
 |:---------|:-----------:|----------------------|
@@ -87,7 +87,7 @@ You'll need to wire up the various components to the TinyS3 ESP32 microcontrolle
 Below is an example diagram connecting to a Feather ESP32-S3 device.
 
 > [!CAUTION]
-> This example does not match the current state of the code pin assignments for a TinyS3, this is just an example. Refer to the table above for the pin connections used in the code.
+> This example does not match the current state of the code pin assignments for a TinyS3; this is just an example. Refer to the table above for the pin connections used in the code.
 
 ![Hookup diagram](media/diagram.PNG)
 
