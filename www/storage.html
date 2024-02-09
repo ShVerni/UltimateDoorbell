@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>        
+        <link rel="stylesheet" href="/main.css">
+        <title>Ultimate Doorbell | Storage Management</title>
+        <!--<link rel="icon" type="image/png" href="/favicon.png"> <!-- Intercom icons created by Freepik - Flaticon: https://www.flaticon.com/free-icons/intercom -->
+        <script src="/storage-script.js"></script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <h1>Storage Manager</h1>
+            <div id="upload">
+                <h2>Select a file to upload it to a directory on the doorbell.</h2>
+                <div id="up-progress">
+                    <div id="up-bar"></div>
+                    <div id="up-percent">0%</div>
+                </div>
+                <input type="file" id="up-file" disabled>
+                <div id="message"></div>
+                <div class="button-container">
+                    <button class="def-button" id="up-www">Upload to WWW</button>
+                    <button class="def-button" id="up-settings">Upload Settings</button>
+                    <button class="def-button" id="up-chimes">Upload Chime Sound</button>
+                </div>
+            </div>
+            <div id="manage">
+                <h2>File List</h2>
+                <table>
+                    <tbody id="file-list">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

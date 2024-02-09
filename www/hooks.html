@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>        
+        <link rel="stylesheet" href="/main.css">
+        <script src="/hooks-script.js"></script>
+        <link rel="icon" type="image/png" href="/favicon.png"> <!-- Intercom icons created by Freepik - Flaticon: https://www.flaticon.com/free-icons/intercom -->
+        <title>Ultimate Doorbell | Webhooks Management</title>
+    </head>
+    <body>
+        <div id="wrapper">
+            <h1>Webhook Manager</h1>
+            <div id="message"></div>
+            <h2>Note on parameters:</h2>
+            <p class="large-text">GET or POST parameters can both be added in the same way, by using a string of the format "name1:val1,name2:val2..." for all desired parameters. There two special parameter template values you can include. Those parameters will have their template values replaced by the following values:</p>
+            <p class="large-text">%SOUND_FILE% This will be replaced with the full path of the sound file being played by the event triggering the hook. This parameter will be omitted if no sound file was provided by the event</p>
+            <p class="large-text">%EVENT% This will be replaced with an integer representing the triggering hook event (see the Events enum in the LEDRing.h file)</p>
+            <form id="webhook">
+                <label for="url">Full URL</label>
+                <input class="stacked-input" type="text" id="url" name="url">
+                <label for="parameters">Optional parameters</label>
+                <input class="stacked-input"  type="text" id="parameters" name="parameters">
+                <label for="method">Request method</label>
+                <select class="stacked-input"  id="method" name="method">
+                    <option value="0">GET</option>
+                    <option value="1">POST</option>
+                </select>             
+            </form>
+            <div class="button-container">
+                <button class="def-button" id="add-hook">Add Webhook</button>
+            </div>
+            <hr>
+            <h2>Existing Webhooks</h2>
+            <input type="checkbox" class="big-check-box" name="enable" id="enable">
+            <span class="big-check-box-label">Enable webhooks</span>
+            <div class="button-container">
+                <button class="def-button" id="update">Update Webhook Settings</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>URL</th>
+                        <th>Parameters</th>
+                        <th>Method</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody id="hook-list">
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

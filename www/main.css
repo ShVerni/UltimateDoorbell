@@ -1,0 +1,155 @@
+#message {
+    font-size: 18px;
+    font-weight: bolder;
+}
+
+body {
+    background: #3498db;
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #777;
+}
+
+#wrapper {
+    background: #fff;
+    max-width: 1600px;
+    min-width: 36em;
+    margin: 25px auto;
+    padding: 30px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#up-file {
+    max-width: 600px;
+    height: 44px;
+    border-radius: 4px;
+    margin: 10px auto;
+    font-size: 17px;
+    padding: 0;
+    border: 1px solid #ddd;
+    line-height: 44px;
+    text-align: left;
+    display: block;
+    cursor: pointer;
+}
+
+#up-bar, #up-progress {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    position: relative;
+}
+
+#up-progress {
+    margin: 10px auto;
+    max-width: 600px;
+}
+
+#up-bar {
+    background-color: #3498db;
+    width: 0%;
+    height: 30px;
+}
+
+#up-percent {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000, -1px -1px 0 #000;
+    color: #fff;
+}
+
+.def-button {
+    padding: 0 5px;
+    max-width: 25em;
+    border-radius: 4px;
+    margin: 10px;
+    font-size: 20px;
+    background: #3498db;
+    color: #fff;
+    cursor: pointer;
+    border: 0;
+    line-height: 44px;
+    text-decoration: none;
+}
+
+.large-text {
+    font-size: 18px;
+}
+
+table {
+    margin: 0 auto;
+}
+
+.file {
+    font-size: 20px;
+    margin: 5px;
+    text-align: left;
+}
+
+.file td {
+    padding: 5px 10px;
+}
+
+.delete, .download {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.delete {
+    color: red; 
+}
+
+.download {
+    color: blue;
+}
+
+#volume {
+    width: 350px;
+}
+
+#volume-val {
+    font-size: 19px;
+    display: inline-block;
+    margin: 2px;
+    width: 25px;
+    /* Firefox has issues
+    position: relative;
+    top: -5px;
+    */
+}
+
+.stacked-input {
+    margin: 8px auto;
+    width: 50%;
+    padding: 12px 20px;
+    display: block;
+    border: 1px solid #9b97a3;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 20px;
+  }
+
+.big-check-box {
+    width: 25px;
+    height: 25px;
+}
+
+.big-check-box-label {
+    font-size: 20px;
+    display: inline-block;
+}
+
+th, label {
+    font-size: 18px;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>        
+        <link rel="stylesheet" href="/main.css">
+        <script src="/sounds-script.js"></script>
+        <link rel="icon" type="image/png" href="/favicon.png"> <!-- Intercom icons created by Freepik - Flaticon: https://www.flaticon.com/free-icons/intercom -->
+        <title>Ultimate Doorbell | Chime Sounds Management</title>
+    </head>
+    <body>
+        <div id="wrapper">
+            <h1>Chime Manager</h1>
+            <div id="message"></div>
+            <div class="volume-container">
+                <h2>Ring Volume</h2>
+                <span id="volume-val">1</span><input type="range" min="0" max="21" value="1" class="slider" id="volume">
+            </div>
+            <hr>
+            <div id="manage">
+                <h2>Check the box of possible sounds that will play when the doorbell rings. The sound that plays will be chosen at random on each button press.</h2>
+                <table>
+                    <tbody id="file-list">
+                    </tbody>
+                </table>
+            </div>
+            <div class="button-container">
+                <button class="def-button" id="update">Update Sound Settings</button>
+            </div>
+        </div>
+    </body>
+</html>
