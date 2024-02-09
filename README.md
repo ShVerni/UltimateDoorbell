@@ -105,7 +105,7 @@ To program the doorbell chime for the first time follow the below directions. Su
 ## Web Interface
 
 After the first flash you need to setup the web interface. There are two ways to do this:
-1. Copy the contents of the `www` folder to the SD card
+1. Copy the the `www` folder to the SD card
 
 Or if you can't access the SD card
 
