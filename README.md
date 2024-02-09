@@ -28,8 +28,8 @@ This list was composed of materials that could all be sourced from a single stor
 
 ## Power Requirements
 
-[!IMPORTANT]
-Make sure you know what kind of power is available to you for your chime. The chime itself requires 5VDC, so your setup must be able to provide this.
+> [!IMPORTANT]
+> Make sure you know what kind of power is available to you for your chime. The chime itself requires 5VDC, so your setup must be able to provide this.
 
 Most household chimes in the United States use a 16VAC with a AC/AC transformer to bring the voltage down from the mains voltage. If this is the case, the safest option is to ignore/remove that transformer and use the 5V 2A supply and barrel jack from above and plug your doorbell into a standard outlet.
 
@@ -71,8 +71,8 @@ If you want to get maximum volume you can connect a [100 kΩ resistor](https://l
 
 Below is an example diagram connecting to a Feather ESP32-S3 device.
 
-[!WARNING]
-This example does not match the current state of the code. Refer to the table above for the pin connections used in the code.
+> [!WARNING]
+> This example does not match the current state of the code. Refer to the table above for the pin connections used in the code.
 
 ![Hookup diagram](media/diagram.PNG)
 
@@ -95,6 +95,7 @@ After the first flash you need to setup the web interface. There are two ways to
 Or if you can't access the SD card
 
 2. Connect to the IP address of the doorbell in your web browser. Here you can upload all the files from the `www` folder to the doorbell and then reboot the device.
+
 ![Web interface setup page screenshot](/media/Setup.PNG)
 
 # Operation
@@ -146,8 +147,8 @@ Uploading a file will overwrite an existing file. You can also delete files from
 
 This page allows you to manage the chime sounds that play. Any checked sounds will be available to play when the button is pushed. You can also adjust the volume at which the sounds will play or test-play any sound. After making changes you need to click the `Update Sound Settings` button.
 
-[!WARNING]
-Chime sounds should have the following format: `mp3, 96 kbps bitrate, 44.1 khz sample rate`. Other formats may work, or may cause crashes or unexpected behavior.
+> [!WARNING]
+> Chime sounds should have the following format: `mp3, 96 kbps bitrate, 44.1 khz sample rate`. Other formats may work, or may cause crashes or unexpected behavior.
 
 ![Screenshot of WiFi configuration](/media/Chimes.PNG)
 
@@ -227,8 +228,8 @@ The `frames` element is special as in contains any number of animation frames wi
 
 A 3D printable model of an intercom style mount is provided here. This is designed to work with a [6cm x 8cm protoboard](https://www.amazon.com/LampVPath-Prototype-Breadboard-Universal-Printed/dp/B07Y3GDN87). The model can be edited in [OnShape](https://cad.onshape.com/documents/8b95ec1fc881ac2f1d033237/w/e06519854f0fc8ff8d912379/e/8287f2abcad0fdb5752faa3f)
 
-![TIP]
-The model seems to print best with the front face down on the print bed, supports enabled, and a line height of 0.28mm.
+> ![TIP]
+> The model seems to print best with the front face down on the print bed, supports enabled, and a line height of 0.28mm.
 
 ![Intercom style mount technical drawing](/media/intercom_mount.PNG)
 ![Intercom style mount installed on wall](/media/Installed.jpg)
