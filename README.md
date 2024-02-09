@@ -248,3 +248,8 @@ A 3D printable model of an intercom style mount is provided here. This is design
 
 ![Intercom style mount technical drawing](/media/intercom_mount.PNG)
 ![Intercom style mount installed on wall](/media/Installed.jpg)
+
+# Acknowledgements
+
+* Dine-dong sound courtesy of [pac007](https://freesound.org/people/pac007/sounds/331567/).
+* Intercom icons created by Freepik - [Flaticon](https://www.flaticon.com/free-icons/intercom)
