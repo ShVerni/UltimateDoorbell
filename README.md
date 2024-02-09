@@ -6,6 +6,21 @@ This project is intended as a flexible and customizable replacement for standard
 
 ## Features
 
+* Chime notifies with sound and light animations so it can't be missed.
+* Fully customizable chime sounds and animations.
+* Easy to use and customizable web interface.
+* Versatile and adaptable hardware requirements.
+* Web hooks to trigger alerts when the bell rings.
+* HTTP API can be used to connect multiple chimes with webhooks so they all ring together.
+
+### To Do
+
+* Additional 3D printable cases.
+* Timer options to allow for quiet periods or different chime sounds at different times.
+* Fully document API.
+* Create stripped-down version that uses SPIFFS instead of SD card.
+* Custom PCB.
+
 # Requirements
 
 These are the suggested requirements for this project, however customization is encouraged.
