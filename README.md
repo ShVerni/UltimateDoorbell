@@ -41,8 +41,8 @@ If you already have DC voltage available at the wall thats greater than 5V, you 
 
 You'll need to wire up the various components to the TinyS3 ESP32 microcontroller in the following manner.
 
-[!IMPORTANT]
-This setup assumes the doorbell button connects to GND. If this is not the case, you'll need to modify the code and replace the pull-up resistor setting with a pull-down resistor.
+> [!IMPORTANT]
+> This setup assumes the doorbell button connects to GND. If this is not the case, you'll need to modify the code and replace the pull-up resistor setting with a pull-down resistor.
 
 |TinyS3 Pin| Device Pin  | Device               |
 |:---------|:-----------:|----------------------|
@@ -66,8 +66,8 @@ This setup assumes the doorbell button connects to GND. If this is not the case,
 |5V        |5V out       |Power Supply          |
 |GND       |GND          |                      |
 
-[!TIP]
-If you want to get maximum volume you can connect a [100 kΩ resistor](https://learn.adafruit.com/adafruit-max98357-i2s-class-d-mono-amp/pinouts#other-pins-2693325) from the amplifier's gain pin to 5V.
+> [!TIP]
+> If you want to get maximum volume you can connect a [100 kΩ resistor](https://learn.adafruit.com/adafruit-max98357-i2s-class-d-mono-amp/pinouts#other-pins-2693325) from the amplifier's gain pin to 5V.
 
 Below is an example diagram connecting to a Feather ESP32-S3 device.
 
@@ -228,7 +228,7 @@ The `frames` element is special as in contains any number of animation frames wi
 
 A 3D printable model of an intercom style mount is provided here. This is designed to work with a [6cm x 8cm protoboard](https://www.amazon.com/LampVPath-Prototype-Breadboard-Universal-Printed/dp/B07Y3GDN87). The model can be edited in [OnShape](https://cad.onshape.com/documents/8b95ec1fc881ac2f1d033237/w/e06519854f0fc8ff8d912379/e/8287f2abcad0fdb5752faa3f)
 
-> ![TIP]
+> [!TIP]
 > The model seems to print best with the front face down on the print bed, supports enabled, and a line height of 0.28mm.
 
 ![Intercom style mount technical drawing](/media/intercom_mount.PNG)
