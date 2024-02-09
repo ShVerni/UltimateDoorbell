@@ -50,11 +50,11 @@ Most household chimes in the United States use 16VAC with a AC/AC transformer to
 
 If you already have DC voltage available at the wall that's greater than 5V, you can use the MPM3610 from above to bring the voltage down to 5V.
 
-# Assembly
+# Setup
 
 ## Hardware
 
-While you can use any ESP32 device, one with two or more cores is highly recommended, and the ESP32-S3 is the preferred version, and specifically the TinyS3 board. You'll need to wire up the various components to the TinyS3 ESP32 in the following manner:
+While you can use any ESP32 device, one with two or more cores is highly recommended, and the ESP32-S3 is the preferred version, specifically the TinyS3 board. You'll need to wire up the various components to the TinyS3 ESP32 in the following manner:
 
 > [!IMPORTANT]
 > This setup assumes the doorbell button connects to GND. If this is not the case, you'll need to modify the code and change the pull-up resistor setting to a pull-down resistor and change the code accordingly.
@@ -143,7 +143,7 @@ The LED ring has several animations and codes that convey the state of the door 
 
 The web interface provides the means to configure and customize your doorbell. You'll need to visit the IP address of your doorbell in a web browser. You'll be presented with a series of links to the various management pages.
 
-![Screenshot of WiFi configuration](/media/Web_interface.PNG)
+![Screenshot of web interface](/media/Web_interface.PNG)
 
 ### Manage Storage
 
@@ -155,7 +155,7 @@ This page allows you to manage the contents of the SD card. You can upload files
 
 Uploading a file will overwrite an existing file. You can also delete files from the doorbell here.
 
-![Screenshot of WiFi configuration](/media/Storage.PNG)
+![Screenshot of storage configuration](/media/Storage.PNG)
 
 
 ### Manage Chime Sounds
@@ -165,7 +165,7 @@ This page allows you to manage the chime sounds that play. Any checked sounds wi
 > [!IMPORTANT]
 > Chime sounds should have the following format: `mp3, 96 kbps bitrate, 44.1 khz sample rate`. Other formats may work, or may cause crashes or unexpected behavior.
 
-![Screenshot of WiFi configuration](/media/Chimes.PNG)
+![Screenshot of chime sounds configuration](/media/Chimes.PNG)
 
 ### Manage Webhooks
 
@@ -178,13 +178,13 @@ If you want to include POST or GET parameters you can create a comma separated l
 
 An example parameter list would be: `api-key:12345678,sound:%SOUND_FILE%`
 
-![Screenshot of WiFi configuration](/media/Webhooks.PNG)
+![Screenshot of webhooks configuration](/media/Webhooks.PNG)
 
 ### Update Firmware
 
 This page can used to update the firmware. You'll need upload the `firmware.bin` file after running a build from PlatformIO. This firmware can be found in the `.pio/build` folder for your specific device.
 
-![Screenshot of WiFi configuration](/media/Update_firmware.PNG)
+![Screenshot of firmware update page](/media/Update_firmware.PNG)
 
 ## Customizing Animations
 
