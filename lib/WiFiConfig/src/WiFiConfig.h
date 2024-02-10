@@ -1,10 +1,13 @@
 /*
- * This file and associated .cpp file are licensed under the MIT Lesser General Public License Copyright (c) 2024 Sam Groveman
+ * This file and associated .cpp file are licensed under the GPLv3 License Copyright (c) 2024 Sam Groveman
  * 
- * External libraries needed: https://github.com/alanswx/ESPAsyncWiFiManager
+ * External libraries needed:
+ * ESPAsyncWiFiManager: https://github.com/alanswx/ESPAsyncWiFiManager
+ * ArduinoJSON: https://arduinojson.org/
  * 
  * Contributors: Sam Groveman
  */
+
 #pragma once
 #include <ESPAsyncWiFiManager.h>
 #include <ArduinoJson.h>

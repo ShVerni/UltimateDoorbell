@@ -1,8 +1,9 @@
 /*
- * This file and associated .cpp file are licensed under the MIT Lesser General Public License Copyright (c) 2024 Sam Groveman
+ * This file and associated .cpp file are licensed under the GPLv3 License Copyright (c) 2024 Sam Groveman
  * 
  * External libraries needed:
  * ESP32-audioI2S : https://github.com/schreibfaul1/ESP32-audioI2S
+ * ArduinoJSON: https://arduinojson.org/
  * 
  * Contributors: Sam Groveman
  */

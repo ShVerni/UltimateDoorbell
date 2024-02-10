@@ -1,5 +1,5 @@
 /*
- * This file and associated .cpp file are licensed under the MIT Lesser General Public License Copyright (c) 2024 Sam Groveman
+ * This file and associated .cpp file are licensed under the GPLv3 License Copyright (c) 2024 Sam Groveman
  * 
  * Adapted from: https://docs.espressif.com/projects/arduino-esp32/en/latest/api/sdmmc.html
  * 

@@ -1,8 +1,9 @@
 /*
- * This file and associated .cpp file are licensed under the MIT Lesser General Public License Copyright (c) 2024 Sam Groveman
+ * This file and associated .cpp file are licensed under the GPLv3 License Copyright (c) 2024 Sam Groveman
  * 
  * External libraries needed:
  * ESPAsyncWebServer: https://github.com/esphome/ESPAsyncWebServer
+ * ArduinoJSON: https://arduinojson.org/
  * 
  * Contributors: Sam Groveman
  */
