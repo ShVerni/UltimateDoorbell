@@ -71,7 +71,7 @@ While you can use any ESP32 device, one with two or more cores and 4 MB or more 
 |37        |d1           |                      |
 |35        |d2           |                      |
 |36        |d3           |                      |
-|3v3       |3V           |                      |
+|3V3       |3V           |                      |
 |GND       |GND          |                      |
 |5         |I2S_BCLK     |MAX98357A             |
 |4         |I2S_LRC      |                      |
@@ -148,7 +148,7 @@ The web interface provides the means to configure and customize your doorbell. Y
 
 ### Manage Storage
 
-This page allows you to manage the contents of the SD card. You can upload files one of three folders:
+This page allows you to manage the contents of the SD card. You can upload files to one of three folders:
 
 * `chimes`: contains the audio files for chime sounds.
 * `settings`: contains the JSON configuration files.
