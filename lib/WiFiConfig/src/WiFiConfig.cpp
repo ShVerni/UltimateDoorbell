@@ -17,7 +17,6 @@ void WiFiConfig::configModeCallback(AsyncWiFiManager *myWiFiManager)
     led->AddEventToQueue(LEDRing::Events::WIFI_CONFIG_START);
 }
 
-
 /// @brief Callback notifying that new settings were saved and connection successful
 /// @param myWiFiManager the AsyncWiFiManager making the call
 void WiFiConfig::configModeEndCallback(AsyncWiFiManager *myWiFiManager)

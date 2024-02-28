@@ -19,7 +19,6 @@ class WiFiConfig {
         void connectWiFi();
 
     private:
-        bool shouldSaveConfig;
         AsyncWiFiManager* wifiManager;
         LEDRing* led;
         void configModeCallback(AsyncWiFiManager *myWiFiManager);
