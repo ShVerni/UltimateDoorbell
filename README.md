@@ -33,15 +33,15 @@ This list was composed of materials that could all be sourced from a single stor
 * [TinyS3 - ESP32-S3](https://www.adafruit.com/product/5398)
 * [Class D Amplifier Breakout - MAX98357A](https://www.adafruit.com/product/3006)
 * [Speaker - 3" Diameter - 4 Ohm 3 Watt](https://www.adafruit.com/product/1314)
-* [Optional: Micro SD SPI or SDIO Card Breakout](https://www.adafruit.com/product/4682)[^2]
-* [Optional: Micro SD Card](https://www.adafruit.com/product/1294)[^2]
+* [Optional: Micro SD SPI or SDIO Card Breakout](https://www.adafruit.com/product/4682)[^1]
+* [Optional: Micro SD Card](https://www.adafruit.com/product/1294)[^1]
 * [NeoPixel Ring - 16 x 5050](https://www.adafruit.com/product/1463)
-* [MPM3610 5V Buck Converter](https://www.adafruit.com/product/4739)[^1]
-* [2.1mm DC barrel jack](https://www.adafruit.com/product/610)[^1]
-* [5V 2A Power Supply](https://www.adafruit.com/product/276)[^1]
+* [MPM3610 5V Buck Converter](https://www.adafruit.com/product/4739)[^2]
+* [2.1mm DC barrel jack](https://www.adafruit.com/product/610)[^2]
+* [5V 2A Power Supply](https://www.adafruit.com/product/276)[^2]
 
-[^1]: Not all of these are required, see the power supply requirements.
-[^2]: SD card and SDIO breakout are optional if more than the ~1.5 MB of onboard storage is needed. See [Notes on Storage](#notes-on-storage).
+[^1]: SD card and SDIO breakout are optional if more than the ~1.5 MB of onboard storage is needed. See [Notes on Storage](#notes-on-storage).
+[^2]: Not all of these are required, see the power supply requirements.
 
 ## Power Requirements
 
