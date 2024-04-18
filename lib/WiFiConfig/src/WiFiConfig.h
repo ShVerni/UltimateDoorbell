@@ -14,13 +14,13 @@
 #include <LEDRing.h>
 
 class WiFiConfig {
-    public:
-        WiFiConfig(AsyncWiFiManager* WiFiManager, LEDRing* ring);
-        void connectWiFi();
+	public:
+		WiFiConfig(AsyncWiFiManager* WiFiManager, LEDRing* ring);
+		void connectWiFi();
 
-    private:
-        AsyncWiFiManager* wifiManager;
-        LEDRing* led;
-        void configModeCallback(AsyncWiFiManager *myWiFiManager);
-        void configModeEndCallback(AsyncWiFiManager *myWiFiManager);
+	private:
+		AsyncWiFiManager* wifiManager;
+		LEDRing* led;
+		void configModeCallback(AsyncWiFiManager *myWiFiManager);
+		void configModeEndCallback(AsyncWiFiManager *myWiFiManager);
 };

@@ -12,13 +12,14 @@ This project is intended as a flexible and customizable replacement for standard
 * Versatile and adaptable hardware requirements.
 * Web hooks to trigger alerts when the bell rings.
 * HTTP API can be used to connect multiple chimes with webhooks so they all ring together.
+* Choice of using onboard storage or external storage for expansion.
 
 ### To Do
 
 * Additional 3D printable case and mounting options.
 * Timer options to allow for quiet periods or different chime sounds at different times.
 * Fully document API.
-* Create stripped-down version that uses SPIFFS instead of SD card.
+* ~~Create stripped-down version that uses flash filesystem instead of SD card.~~
 * Custom PCB.
 
 # Requirements
@@ -32,14 +33,15 @@ This list was composed of materials that could all be sourced from a single stor
 * [TinyS3 - ESP32-S3](https://www.adafruit.com/product/5398)
 * [Class D Amplifier Breakout - MAX98357A](https://www.adafruit.com/product/3006)
 * [Speaker - 3" Diameter - 4 Ohm 3 Watt](https://www.adafruit.com/product/1314)
-* [Micro SD SPI or SDIO Card Breakout](https://www.adafruit.com/product/4682)
-* [Micro SD Card](https://www.adafruit.com/product/1294)
+* [Optional: Micro SD SPI or SDIO Card Breakout](https://www.adafruit.com/product/4682)[^2]
+* [Optional: Micro SD Card](https://www.adafruit.com/product/1294)[^2]
 * [NeoPixel Ring - 16 x 5050](https://www.adafruit.com/product/1463)
 * [MPM3610 5V Buck Converter](https://www.adafruit.com/product/4739)[^1]
 * [2.1mm DC barrel jack](https://www.adafruit.com/product/610)[^1]
 * [5V 2A Power Supply](https://www.adafruit.com/product/276)[^1]
 
 [^1]: Not all of these are required, see the power supply requirements.
+[^2]: SD card and SDIO breakout are optional if more than the ~1.5 MB of onboard storage is needed. See [Notes on Storage](#notes-on-storage).
 
 ## Power Requirements
 
@@ -54,7 +56,7 @@ If you already have DC voltage available at the wall that's greater than 5V, you
 
 ## Hardware
 
-While you can use any ESP32 device, one with two or more cores and 4 MB or more of PSRAM is required and variants without those specifications will not work. The ESP32-S3 is the preferred version, specifically the TinyS3 board. You'll need to wire up the various components to the TinyS3 ESP32 in the following manner:
+While you can use any ESP32 device, one with two or more cores and 4 MB or more of PSRAM is required and variants without those specifications will not work. The ESP32-S3 is the preferred version, specifically the TinyS3 board. Additionally, at least 4 MB of flash is required and 8 MB recommended if you plan to forgo the SD card and use the onboard flash for storage. You'll need to wire up the various components to the TinyS3 ESP32 in the following manner:
 
 > [!IMPORTANT]
 > This setup assumes the doorbell button connects to GND as the pin connected to the button uses a pull-up resistor and is considered active when low. If this is not the case, you'll need to modify the code and change the pull-up resistor setting to a pull-down resistor and change the code accordingly. A substitute or a new button can be sued if there isn't an existing option, but such scenarios aren't covered in this guide.
@@ -89,7 +91,18 @@ Below is an example diagram connecting to a Feather ESP32-S3 device.
 ![Hookup diagram](media/diagram.PNG)
 
 > [!CAUTION]
-> The diagram above does not match the current state of the code and pin assignments for a TinyS3; this is just an example. Refer to the table above for the pin connections used in the code.
+> The diagram above does not match the current state of the code and pin assignments for a TinyS3; this is just an example for illustrative purposes. Refer to the table above for the pin connections used in the code.
+
+### Notes On Storage
+
+By default the device is configured to use a portion of the onboard flash storage as a LittleFS storage system. You'll have access to ~1.3-1.5 MB of storage using this system. If more storage is desired, you can hook up the SD card as described above, and you'll need to change one line in the [main.cpp](/src/main.cpp) file. Specifically, find the line that reads `//#define USE_SDCARD` and uncomment it so it resembles the following:
+
+```cpp
+/// @brief Uncomment to enable use of SD card instead of LittleFS
+#define USE_SDCARD
+```
+
+After doing that, rebuild and update the firmware on your device as described [below](#software).
 
 ## Software
 
@@ -105,9 +118,9 @@ To program the doorbell chime for the first time follow the below directions. Su
 ## Web Interface
 
 After the first flash you need to setup the web interface. There are two ways to do this:
-1. Copy the the `www` folder to the SD card
+1. Copy the the `www` folder to the SD card, if using one
 
-Or if you can't access the SD card
+Or if you are using the onboard flash storage or can't access the SD card
 
 2. Connect to the IP address of the doorbell in your web browser. Here you can upload all the files from the `www` folder one at a time to the doorbell and then reboot the device.
 
@@ -117,7 +130,7 @@ Or if you can't access the SD card
 
 ## WiFi Setup
 
-If this is the first time powering on the doorbell it could take a while as it may need to format and mount the SD card. Once it's finished the initial boot, you'll need to configure it to connect to your WiFi network. When you power on the doorbell for the first time (or if the expected WiFi network is not available for it to connect to) you'll need to wait a minute or so until the LEDs display an short animation of blue LEDs rotating. This is  used to indicate that the doorbell is in WiFi setup mode.
+If this is the first time powering on the doorbell it could take a while as it may need to format and mount the SD card or LittleFS storage. Once it's finished the initial boot, you'll need to configure it to connect to your WiFi network. When you power on the doorbell for the first time (or if the expected WiFi network is not available for it to connect to) you'll need to wait a minute or so until the LEDs display an short animation of blue LEDs rotating. This is  used to indicate that the doorbell is in WiFi setup mode.
 
 Once in WiFi setup mode, the doorbell will create its own WiFi network named "UltimateBell". Connect to that network, there should be no password, ideally with your phone and visit the IP address `192.168.4.1` to reach the doorbell's WiFi setup interface (a phone may do this automatically). Choose "Configure WiFi" and pick the WiFi network you want the doorbell to connect to. Enter the WiFi password as shown below.
 
@@ -136,7 +149,7 @@ The LED ring has several animations and codes that convey the state of the doorb
 |Two blue LEDs in a circle      |WiFi setup has started               |
 |Two orange LEDs in a circle    |WiFi setup completed successfully    |
 |Four purple LEDs in a circle   |Firmware updated successfully        |
-|One red LED, constant on       |SD card error                        |
+|One red LED, constant on       |Storage error (SD card or LittleFS)  |
 |Two red LEDs, constant on      |Error loading I2S amplifier settings |
 |Three red LEDs, constant on    |Error with loading webhooks          |
 
@@ -148,13 +161,13 @@ The web interface provides the means to configure and customize your doorbell. Y
 
 ### Manage Storage
 
-This page allows you to manage the contents of the SD card. You can upload files to one of three folders:
+This page allows you to manage the contents of the storage. You can upload files to one of three folders:
 
 * `chimes`: contains the audio files for chime sounds.
 * `settings`: contains the JSON configuration files.
 * `www`: contains the files for the web interface.
 
-Uploading a file will overwrite an existing file if there is one. You can also delete files from the doorbell here.
+Uploading a file will overwrite an existing file if there is one. You can also download and delete files from the doorbell.
 
 ![Screenshot of storage configuration](/media/Storage.PNG)
 

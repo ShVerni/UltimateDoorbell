@@ -12,9 +12,10 @@
 #include <ESPAsyncWebServer.h>
 #include <Update.h>
 #include <SD_MMC.h>
+#include <LittleFS.h>
 #include <HTTPClient.h>
 #include <LEDRing.h>
-#include <SDCard.h>
+#include <Storage.h>
 #include <ArduinoJson.h>
 #include <SoundPlayer.h>
 #include <Webhooks.h>
@@ -22,40 +23,40 @@
 
 /// @brief Local web server.
 class Webserver {
-    public:
-        /// @brief Reboot on firmware update flag
-        bool shouldReboot = false;
-        
-        Webserver(AsyncWebServer* webserver, LEDRing* LEDs, SoundPlayer* Player, SDCard* Card, Webhooks* Hooks, bool* Ringing);
-        bool ServerStart();
-        void ServerStop();
-        static void RebootCheckerTaskWrapper(void* arg);
-        
-    private:
-        #define FIRMWARE_VERSION "0.5.0"
-        /// @brief Pointer to the Webserver object
-        AsyncWebServer* server;
+	public:
+		/// @brief Reboot on firmware update flag
+		bool shouldReboot = false;
+		
+		Webserver(AsyncWebServer* webserver, LEDRing* LEDs, SoundPlayer* Player, Storage* Storage, Webhooks* Hooks, bool* Ringing);
+		bool ServerStart();
+		void ServerStop();
+		static void RebootCheckerTaskWrapper(void* arg);
+		
+	private:
+		#define FIRMWARE_VERSION "0.5.0"
+		/// @brief Pointer to the Webserver object
+		AsyncWebServer* server;
 
-        /// @brief Pointer to the LEDRing object
-        LEDRing* leds;
+		/// @brief Pointer to the LEDRing object
+		LEDRing* leds;
 
-        /// @brief Pointer to the SDCard object
-        SDCard* card;
+		/// @brief Pointer to the storage object
+		Storage* storage;
 
-        /// @brief Pointer to the SoundPlayer object
-        SoundPlayer* player;
+		/// @brief Pointer to the SoundPlayer object
+		SoundPlayer* player;
 
-         /// @brief Pointer to the Webhooks object
-        Webhooks* hooks;
+		 /// @brief Pointer to the Webhooks object
+		Webhooks* hooks;
 
-        /// @brief Reference to a bool that can be used to indicate the bell is ringing
-        bool* ringing;
+		/// @brief Reference to a bool that can be used to indicate the bell is ringing
+		bool* ringing;
 
-        static void onUpload_www(AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final);
-        static void onUpload_settings(AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final);
-        static void onUpload_chimes(AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final);
-        static void onUpdate(AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final);
-        void RebootChecker();
+		static void onUpload_www(AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final);
+		static void onUpload_settings(AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final);
+		static void onUpload_chimes(AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final);
+		static void onUpdate(AsyncWebServerRequest *request, String filename, size_t index, uint8_t *data, size_t len, bool final);
+		void RebootChecker();
 };
 
 // @brief Text of update webpage
@@ -68,62 +69,62 @@ const char update_page[] = R"(<!DOCTYPE html>
 <div id='up-wrap'>
 <h1>Ultimate Doorbell</h1>
 <h2>Upload Firmware</h2>
-<h3>Current version: 0.5.0</h3>
+<h3>Current version: 0.6.0</h3>
 <div id='up-progress'>
-    <div id='up-bar'></div>
-    <div id='up-percent'>0%</div>
+	<div id='up-bar'></div>
+	<div id='up-percent'>0%</div>
 </div>
 <input type='file' id='up-file' disabled>
 <label for='up-file' id='up-label'>
-    Update
+	Update
 </label>
 <div id='message'></div>
 </div>
 <script>
 var uprog = {
-    hBar : null,
-    hPercent : null,
-    hFile : null,
-    init : () => {
-        uprog.hBar = document.getElementById('up-bar');
-        uprog.hPercent = document.getElementById('up-percent');
-        uprog.hFile = document.getElementById('up-file');
-        uprog.hFile.disabled = false;
-        document.getElementById('up-label').onclick = uprog.upload;
-    },
-    update : (percent) => {
-    percent = percent + '%';
-    uprog.hBar.style.width = percent;
-    uprog.hPercent.innerHTML = percent;
-    if (percent == '100%') { uprog.hFile.disabled = false; }
-    },
-    upload : () => {
-    if(uprog.hFile.files.length == 0 ){
-    return;
-    }
-    let file = uprog.hFile.files[0];
-    uprog.hFile.disabled = true;
-    uprog.hFile.value = '';
-    let xhr = new XMLHttpRequest(), data = new FormData();
-    data.append('upfile', file);
-    xhr.open('POST', '/update');
-    let percent = 0;
-    xhr.upload.onloadstart = (evt) => { uprog.update(0); };
-    xhr.upload.onloadend = (evt) => { uprog.update(100); };
-    xhr.upload.onprogress = (evt) => {
-        percent = Math.ceil((evt.loaded / evt.total) * 100);
-        uprog.update(percent);
-    };
-    xhr.onload = function () {
-        if (this.response != 'OK' || this.status != 202) {
-        document.getElementById('message').innerHTML = 'ERROR!';
-        } else {
-        uprog.update(100);
-        document.getElementById('message').innerHTML = 'Success, rebooting!';
-        }
-    };
-    xhr.send(data);
-    }
+	hBar : null,
+	hPercent : null,
+	hFile : null,
+	init : () => {
+		uprog.hBar = document.getElementById('up-bar');
+		uprog.hPercent = document.getElementById('up-percent');
+		uprog.hFile = document.getElementById('up-file');
+		uprog.hFile.disabled = false;
+		document.getElementById('up-label').onclick = uprog.upload;
+	},
+	update : (percent) => {
+	percent = percent + '%';
+	uprog.hBar.style.width = percent;
+	uprog.hPercent.innerHTML = percent;
+	if (percent == '100%') { uprog.hFile.disabled = false; }
+	},
+	upload : () => {
+	if(uprog.hFile.files.length == 0 ){
+	return;
+	}
+	let file = uprog.hFile.files[0];
+	uprog.hFile.disabled = true;
+	uprog.hFile.value = '';
+	let xhr = new XMLHttpRequest(), data = new FormData();
+	data.append('upfile', file);
+	xhr.open('POST', '/update');
+	let percent = 0;
+	xhr.upload.onloadstart = (evt) => { uprog.update(0); };
+	xhr.upload.onloadend = (evt) => { uprog.update(100); };
+	xhr.upload.onprogress = (evt) => {
+		percent = Math.ceil((evt.loaded / evt.total) * 100);
+		uprog.update(percent);
+	};
+	xhr.onload = function () {
+		if (this.response != 'OK' || this.status != 202) {
+		document.getElementById('message').innerHTML = 'ERROR!';
+		} else {
+		uprog.update(100);
+		document.getElementById('message').innerHTML = 'Success, rebooting!';
+		}
+	};
+	xhr.send(data);
+	}
 };
 window.addEventListener('load', uprog.init);
 </script>
@@ -154,13 +155,13 @@ const char index_page[] = R"(<!DOCTYPE html>
 <p>Default files are: index.html, update.html, reset.html, the latter two are optional.</p>
 <p><strong>Upload ALL necessary web files (.html/.css/.js) before rebooting</strong>.</p>
 <div id='up-progress'>
-    <div id='up-bar'></div>
-    <div id='up-percent'>0%</div>
+	<div id='up-bar'></div>
+	<div id='up-percent'>0%</div>
 </div>
 <div id='message'></div>
 <input type='file' id='up-file' disabled>
 <label class='def-button' for='up-file' id='up-label'>
-    Upload
+	Upload
 </label>
 <a class='def-button' id='update' href='/update'>Update Firmware</a>
 <button class='def-button' id='reboot'>Reboot Device</button>
@@ -168,74 +169,74 @@ const char index_page[] = R"(<!DOCTYPE html>
 </div>
 <script>
 var uprog = {
-    hBar : null,
-    hPercent : null,
-    hFile : null,
-    init : () => {
-        uprog.hBar = document.getElementById('up-bar');
-        uprog.hPercent = document.getElementById('up-percent');
-        uprog.hFile = document.getElementById('up-file');
-        uprog.hFile.disabled = false;
-        document.getElementById('up-label').onclick = uprog.upload;
-    },
-    update : (percent) => {
-    percent = percent + '%';
-    uprog.hBar.style.width = percent;
-    uprog.hPercent.innerHTML = percent;
-    if (percent == '100%') { uprog.hFile.disabled = false; }
-    },
-    upload : () => {
-    if(uprog.hFile.files.length == 0 ){
-    return;
-    }
-    let file = uprog.hFile.files[0];
-    uprog.hFile.disabled = true;
-    uprog.hFile.value = '';
-    let xhr = new XMLHttpRequest(), data = new FormData();
-    data.append('upfile', file);
-    xhr.open('POST', '/upload-www');
-    let percent = 0;
-    xhr.upload.onloadstart = (evt) => { uprog.update(0); };
-    xhr.upload.onloadend = (evt) => { uprog.update(100); };
-    xhr.upload.onprogress = (evt) => {
-        percent = Math.ceil((evt.loaded / evt.total) * 100);
-        uprog.update(percent);
-    };
-    xhr.onload = function () {
-        if (this.status != 202) {
-        document.getElementById('message').innerHTML = 'ERROR!';
-        } else {
-        uprog.update(100);
-        document.getElementById('message').innerHTML = 'File uploaded!';
-        }
-    };
-    xhr.send(data);
-    }
+	hBar : null,
+	hPercent : null,
+	hFile : null,
+	init : () => {
+		uprog.hBar = document.getElementById('up-bar');
+		uprog.hPercent = document.getElementById('up-percent');
+		uprog.hFile = document.getElementById('up-file');
+		uprog.hFile.disabled = false;
+		document.getElementById('up-label').onclick = uprog.upload;
+	},
+	update : (percent) => {
+	percent = percent + '%';
+	uprog.hBar.style.width = percent;
+	uprog.hPercent.innerHTML = percent;
+	if (percent == '100%') { uprog.hFile.disabled = false; }
+	},
+	upload : () => {
+	if(uprog.hFile.files.length == 0 ){
+	return;
+	}
+	let file = uprog.hFile.files[0];
+	uprog.hFile.disabled = true;
+	uprog.hFile.value = '';
+	let xhr = new XMLHttpRequest(), data = new FormData();
+	data.append('upfile', file);
+	xhr.open('POST', '/upload-www');
+	let percent = 0;
+	xhr.upload.onloadstart = (evt) => { uprog.update(0); };
+	xhr.upload.onloadend = (evt) => { uprog.update(100); };
+	xhr.upload.onprogress = (evt) => {
+		percent = Math.ceil((evt.loaded / evt.total) * 100);
+		uprog.update(percent);
+	};
+	xhr.onload = function () {
+		if (this.status != 202) {
+		document.getElementById('message').innerHTML = 'ERROR!';
+		} else {
+		uprog.update(100);
+		document.getElementById('message').innerHTML = 'File uploaded!';
+		}
+	};
+	xhr.send(data);
+	}
 };
 window.addEventListener('load', uprog.init);
 document.getElementById("reboot").onclick = function() {
-    let xhr = new XMLHttpRequest();
-    xhr.open('PUT', '/reboot');
-    xhr.onload = function () {
-        if (this.status != 200) {
-        document.getElementById('message').innerHTML = 'ERROR!';
-        } else {
-        document.getElementById('message').innerHTML = 'Success, rebooting!';
-        }
-    };
-    xhr.send();
+	let xhr = new XMLHttpRequest();
+	xhr.open('PUT', '/reboot');
+	xhr.onload = function () {
+		if (this.status != 200) {
+		document.getElementById('message').innerHTML = 'ERROR!';
+		} else {
+		document.getElementById('message').innerHTML = 'Success, rebooting!';
+		}
+	};
+	xhr.send();
 };
 document.getElementById("reset").onclick = function() {
-    let xhr = new XMLHttpRequest();
-    xhr.open('PUT', '/reset');
-    xhr.onload = function () {
-        if (this.response != 200) {
-        document.getElementById('message').innerHTML = 'ERROR!';
-        } else {
-        document.getElementById('message').innerHTML = 'Success, rebooting!';
-        }
-    };
-    xhr.send();
+	let xhr = new XMLHttpRequest();
+	xhr.open('PUT', '/reset');
+	xhr.onload = function () {
+		if (this.response != 200) {
+		document.getElementById('message').innerHTML = 'ERROR!';
+		} else {
+		document.getElementById('message').innerHTML = 'Success, rebooting!';
+		}
+	};
+	xhr.send();
 };
 </script>
 <style>

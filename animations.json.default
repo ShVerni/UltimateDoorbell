@@ -182,7 +182,7 @@
                 }
             ] 
         },
-         "SD_ERROR" : {
+         "STORAGE_ERROR" : {
             "repetitions": 0,
             "clearOnDone": false,
             "frames": [
