@@ -6,7 +6,7 @@ This project is intended as a flexible and customizable replacement for standard
 
 ## Features
 
-* Chime notifies with sound and light animations so it can't be missed.
+* Chime notifies with sound and light animations so it can't be missed and can be used by people with hearing problems.
 * Fully customizable chime sounds and animations.
 * Easy to use and customizable web interface.
 * Versatile and adaptable hardware requirements.
@@ -37,7 +37,7 @@ This list was composed of materials that could all be sourced from a single stor
 * [Optional: Micro SD Card](https://www.adafruit.com/product/1294)[^1]
 * [NeoPixel Ring - 16 x 5050](https://www.adafruit.com/product/1463)
 * [MPM3610 5V Buck Converter](https://www.adafruit.com/product/4739)[^2]
-* [2.1mm DC barrel jack](https://www.adafruit.com/product/610)[^2]
+* [2.1mm DC Barrel Jack](https://www.adafruit.com/product/610)[^2]
 * [5V 2A Power Supply](https://www.adafruit.com/product/276)[^2]
 
 [^1]: SD card and SDIO breakout are optional if more than the ~1.5 MB of onboard storage is needed. See [Notes on Storage](#notes-on-storage).
@@ -56,7 +56,7 @@ If you already have DC voltage available at the wall that's greater than 5V, you
 
 ## Hardware
 
-While you can use any ESP32 device, one with two or more cores and 4 MB or more of PSRAM is required and variants without those specifications will not work. The ESP32-S3 is the preferred version, specifically the TinyS3 board. Additionally, at least 4 MB of flash is required and 8 MB recommended if you plan to forgo the SD card and use the onboard flash for storage. You'll need to wire up the various components to the TinyS3 ESP32 in the following manner:
+While you can use any ESP32 device, one with two or more cores and 4 MB or more of PSRAM is required and variants without those specifications will almost certainly not work. The ESP32-S3 is the preferred version, specifically the TinyS3 board. Additionally, at least 4 MB of flash is required and 8 MB recommended if you plan to forgo the SD card and use the onboard flash for storage. You'll need to wire up the various components to the TinyS3 ESP32 in the following manner:
 
 > [!IMPORTANT]
 > This setup assumes the doorbell button connects to GND as the pin connected to the button uses a pull-up resistor and is considered active when low. If this is not the case, you'll need to modify the code and change the pull-up resistor setting to a pull-down resistor and change the code accordingly. A substitute or a new button can be sued if there isn't an existing option, but such scenarios aren't covered in this guide.
@@ -118,7 +118,7 @@ To program the doorbell chime for the first time follow the below directions. Su
 ## Web Interface
 
 After the first flash you need to setup the web interface. There are two ways to do this:
-1. Copy the the `www` folder to the SD card, if using one
+1. Copy the `www` folder to the SD card, if using one
 
 Or if you are using the onboard flash storage or can't access the SD card
 
@@ -130,13 +130,13 @@ Or if you are using the onboard flash storage or can't access the SD card
 
 ## WiFi Setup
 
-If this is the first time powering on the doorbell it could take a while as it may need to format and mount the SD card or LittleFS storage. Once it's finished the initial boot, you'll need to configure it to connect to your WiFi network. When you power on the doorbell for the first time (or if the expected WiFi network is not available for it to connect to) you'll need to wait a minute or so until the LEDs display an short animation of blue LEDs rotating. This is  used to indicate that the doorbell is in WiFi setup mode.
+If this is the first time powering on the doorbell it could take a while as it may need to format and mount the SD card or LittleFS storage. Once it's finished the initial boot, you'll need to configure it to connect to your WiFi network. When you power on the doorbell for the first time (or if the expected WiFi network is not available for it to connect to) you'll need to wait a minute or so until the LEDs display an short animation of blue LEDs rotating. This is used to indicate that the doorbell is in WiFi setup mode.
 
 Once in WiFi setup mode, the doorbell will create its own WiFi network named "UltimateBell". Connect to that network, there should be no password, ideally with your phone and visit the IP address `192.168.4.1` to reach the doorbell's WiFi setup interface (a phone may do this automatically). Choose "Configure WiFi" and pick the WiFi network you want the doorbell to connect to. Enter the WiFi password as shown below.
 
 ![Screenshot of WiFi configuration](/media/WifiGateway.png)
 
-If the WiFi credentials are good, the doorbell will reboot and attempt to connect to the network, and you're done! If not, you can repeat this process adn try again. To reset the WiFi see [the web interface](#web-interface).
+If the WiFi credentials are good, the doorbell will reboot and attempt to connect to the network, and you're done! If not, you can repeat this process and try again. To reset the WiFi see [the web interface](#web-interface).
 
 ## LED Codes
 
@@ -155,7 +155,7 @@ The LED ring has several animations and codes that convey the state of the doorb
 
 ## Web Interface
 
-The web interface provides the means to configure and customize your doorbell. You'll need to visit the IP address of your doorbell in a web browser after the initial setup and once it's on your WiFi network. Whe you do, you'll be presented with a series of links to the various management pages.
+The web interface provides the means to configure and customize your doorbell. You'll need to visit the IP address of your doorbell in a web browser after the initial setup and once it's on your WiFi network. When you do, you'll be presented with a series of links to the various management pages.
 
 ![Screenshot of web interface](/media/Web_interface.PNG)
 
@@ -176,7 +176,7 @@ Uploading a file will overwrite an existing file if there is one. You can also d
 This page allows you to manage the chime sounds that play. Any checked sounds will be available to play when the button is pushed, and one of the available sounds will be chosen randomly. You can also adjust the volume at which the sounds will play or test-play any sound and its animation. After making changes you need to click the `Update Sound Settings` button before they take effect.
 
 > [!IMPORTANT]
-> Chime sounds should have the following format: `mp3, 96 kbps bitrate, 44.1 khz sample rate`. Other formats may work, or may cause crashes or unexpected behavior.
+> Chime sounds should have the following format: `mp3, 96 kbps bitrate, 44.1 khz sample rate`. Other formats may work or may cause crashes or unexpected behavior.
 
 ![Screenshot of chime sounds configuration](/media/Chimes.PNG)
 
@@ -184,7 +184,7 @@ This page allows you to manage the chime sounds that play. Any checked sounds wi
 
 This page will allow you to add or remove webhooks. Webhooks are automatically called when the bell chimes and again when the chime finishes ringing. Other event may be added to webhooks in the future. To add a webhook enter the full URL of the webhook.
 
-If you want to include POST or GET parameters you can create a comma separated list of `key:value` pairs. There are two special values you can use:
+If you want to include POST or GET parameters, you can create a comma separated list of `key:value` pairs. There are two special values you can use:
 
 * `%SOUND_FILE%` will be replaced with the path on the SD card of the sound file currently being played.
 * `%EVENT%` will be replaced with an integer representing the triggering hook event (see the Events enum in the [LEDRing.h](/lib/LEDRing/src/LEDRing.h) file)
