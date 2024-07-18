@@ -13,15 +13,17 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     document.getElementById("reset").onclick = function () {
-        let xhr = new XMLHttpRequest();
-        xhr.open('PUT', '/reset');
-        xhr.onload = function () {
-            if (this.response != 200) {
-                document.getElementById('message').innerHTML = 'ERROR!';
-            } else {
-                document.getElementById('message').innerHTML = 'Success, rebooting!';
-            }
-        };
-        xhr.send();
+		if (confirm("Reset WiFi settings?") == true) {
+			let xhr = new XMLHttpRequest();
+			xhr.open('PUT', '/reset');
+			xhr.onload = function () {
+				if (this.response != 200) {
+					document.getElementById('message').innerHTML = 'ERROR!';
+				} else {
+					document.getElementById('message').innerHTML = 'Success, rebooting!';
+				}
+			};
+			xhr.send();
+		}
     };
 });
