@@ -59,7 +59,7 @@ If you already have DC voltage available at the wall that's greater than 5V, you
 While you can use any ESP32 device, one with two or more cores and 4 MB or more of PSRAM is required and variants without those specifications will almost certainly not work. The ESP32-S3 is the preferred version, specifically the TinyS3 board. Additionally, at least 4 MB of flash is required and 8 MB recommended if you plan to forgo the SD card and use the onboard flash for storage. You'll need to wire up the various components to the TinyS3 ESP32 in the following manner:
 
 > [!IMPORTANT]
-> This setup assumes the doorbell button connects to GND as the pin connected to the button uses a pull-up resistor and is considered active when low. If this is not the case, you'll need to modify the code and change the pull-up resistor setting to a pull-down resistor and change the code accordingly. A substitute or a new button can be sued if there isn't an existing option, but such scenarios aren't covered in this guide.
+> This setup assumes the doorbell button connects to GND as the pin connected to the button uses a pull-up resistor and is considered active when low. If this is not the case, you'll need to modify the code and change the pull-up resistor setting to a pull-down resistor and change the code accordingly. A substitute or a new button can be used if there isn't an existing option, but such scenarios aren't covered in this guide.
 
 |TinyS3 Pin| Device Pin  | Device               |
 |:---------|:-----------:|----------------------|
